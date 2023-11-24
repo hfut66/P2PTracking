@@ -6,7 +6,6 @@ from statistics import mean
 import csv
 import os
 
-# 读取所有labels
 def get_groundTruth(path):
     with open(path,'r') as f:
         reader = csv.reader(f)
@@ -22,7 +21,7 @@ def get_trackpoints(path):
         p[i][1] = f[i][1]
     return p
 
-def MSE_evaluate(tracked_points, labelsNew): # MSE评估
+def MSE_evaluate(tracked_points, labelsNew):
     MSE_result = []
     # for i in range(len(tracked_points)):
     for i in range(149):
@@ -31,17 +30,17 @@ def MSE_evaluate(tracked_points, labelsNew): # MSE评估
     MSE = np.sum(MSE_result) / len(tracked_points)
     return MSE
 
-def Euclidean_evaluate(tracked_points, labelsNew): # 欧氏距离评估
+def Euclidean_evaluate(tracked_points, labelsNew):
     Euclidean_list = []
     for i in range(len(tracked_points)):
         dis = np.sqrt(np.power(labelsNew[i+1][0]-tracked_points[i][0],2)+np.power(labelsNew[i+1][1]-tracked_points[i][1],2))
         Euclidean_list.append(dis)
     Euclidean= np.sum(Euclidean_list)/len(tracked_points)
     return Euclidean
-#性能评估
-def AR_evaluate(tracked_points_path, labels_path): #准确率评估---欧式距离
+
+def AR_evaluate(tracked_points_path, labels_path):
     labelsNew=get_groundTruth(labels_path)
-    tracked_points = get_trackpoints(tracked_points_path)  # 将文件中数据加载到data数组里
+    tracked_points = get_trackpoints(tracked_points_path)
     print(labelsNew[0])
     pos1 = 0
     pos2 = 0
@@ -83,23 +82,20 @@ def AR_evaluate(tracked_points_path, labels_path): #准确率评估---欧式距�
     return AR1,AR2,AR3,AR4,AR5,AR6,AR7,AR8,mse,Euclidean
 
 label_path="./Point_Annotations/csv/video1_point.csv"
-tracked_points_path="./实验结果15_20_25/No_Patch_tracking_sift_No_update.txt"#No_Patch_tracking,对于9_17_25的文件阈值对应的命名为20_30_40
+tracked_points_path="path to your txt"
 a1,a2,a3,a4,a5,a6,a7,a8,mse,Euclidean=AR_evaluate(tracked_points_path, label_path)
 Result_pattern = ['path={},AR1 = {},AR2 = {},AR3 = {},AR4 = {},AR5 = {},AR6 = {},AR7 = {},AR8 = {},Distance = {},MSE = {}'.format(tracked_points_path,a1,a2,a3,a4,a5,a6,a7,a8,mse,Euclidean)]
 print('Result_pattern = ', Result_pattern)
 
-file = open('./实验结果15_20_25/resultl.txt', 'a')
+file = open('path to your txt', 'a')
 file.write(str(Result_pattern) + '\n')
 file.close()
 
-# print(a1)
+
 print(a2)
 print(a3)
 print(a4)
 print(a5)
-# print(a6)
-# print(a7)
-# print(a8)
 print(mse)
 print(Euclidean)
 
