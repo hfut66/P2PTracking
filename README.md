@@ -11,7 +11,7 @@ python main.py
 
 
 ## Visualization
-Here we show some results of the proposed **P2PTracking** algorithm on [Chloec80](https://arxiv.org/pdf/1602.03012),hysterectomy surgery vedio and laparoscopic pelvic mass excision surgery vedio
+Here we show some results of the proposed **P2PTracking** algorithm on [Chloec80](https://arxiv.org/pdf/1602.03012),hysterectomy surgery vedio and laparoscopic pelvic mass excision surgery vedio.
 ![](./Qualitative.png)
 
 [//]: # (## Acknowledgment)
